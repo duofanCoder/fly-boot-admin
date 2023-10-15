@@ -1,0 +1,19 @@
+import request from "@/utils/request";
+
+export enum Api {
+    USER_PAGE = "/api/v1/user/page",
+    ADD_USER = "/api/v1/user/create",
+    EDIT_USER = "/api/v1/user/update",
+    DELETE_USER = "/api/v1/user/delete",
+    CHANGE_USER_STATUS = "/api/v1/user/page"
+}
+
+export const getUserList = (data?: any) => request.post(Api.USER_PAGE, data);
+
+export const addUser = (data?: any) => request.post(Api.ADD_USER, data);
+
+export const deleteUser = (data?: any) => request.post(Api.DELETE_USER, data);
+
+export const editUser = (data?: any) => request.post(Api.EDIT_USER, data);
+
+export const changeUserStatus = (data?: any) => request.post(Api.CHANGE_USER_STATUS, data);
