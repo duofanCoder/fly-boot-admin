@@ -64,7 +64,7 @@ const passwordRef = ref();
 const loading = ref(false);
 
 const loginForm = reactive({
-    username: "duofan",
+    username: "admin",
     password: "123456",
     remember: 0
 });
