@@ -21,3 +21,5 @@ export const deleteRole = (data?: any) => request.post(Api.DELETE_ROLE, data);
 export const editRole = (data?: any) => request.post(Api.EDIT_ROLE, data);
 
 export const changeRoleStatus = (data?: any) => request.post(Api.CHANGE_ROLE_STATUS, data);
+
+
