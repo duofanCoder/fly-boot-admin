@@ -9,8 +9,7 @@
                     :data="state.treeData"
                     :props="state.defaultProps"
                     show-checkbox
-                    @check-change="menuCheckChage"
-                    :default-checked-keys="getCheckedKeys"
+                    :default-checked-keys="state.treeCheckData"
                     :expand-on-click-node="false"
                 >
                 </el-tree>
@@ -38,39 +37,19 @@ const roleTreeRef = ref();
 const state = reactive({
     isEdit: false,
     treeData: [],
+    treeCheckData:[],
     defaultProps: {
         children: "children",
         label: "label"
     },
     formModel: { roleNo: "" }
 });
-const digui = (data: [any]) => {
-    const arr: any[] = [];
-    for (let index = 0; index < data.length; index++) {
-        const element = data[index].children;
-        for (let j = 0; j < element.length; j++) {
-            const elementJ: {
-                [x: string]: boolean;
-                activated: boolean;
-                value: any;
-            } = element[j];
-            if (elementJ.activated === true) {
-                arr.push(elementJ.value);
-            }
-            if (elementJ.disabled === true) {
-                arr.push(elementJ.value);
-            }
-        }
-    }
-    return arr;
-};
-
 const getColumn = computed(() => {
     return useColumn(undefined, state).dialogColumn;
 });
 
 const getCheckedKeys = computed(() => {
-    return digui(state.treeData as any);
+    return state.treeData;
 });
 
 const userRules = {
@@ -97,15 +76,7 @@ const userRules = {
     //     }
     // ]
 };
-const menuCheckChage = (data: any, isChecked: boolean) => {
-    if (data.children === undefined) {
-        bindPermission({
-            roleNo: state.formModel.roleNo,
-            permission: data.value,
-            bind: isChecked
-        });
-    }
-};
+
 const getDialogTitle = computed(() => (state.isEdit ? "修改角色" : "新增角色"));
 
 const showDialog = (val: any = {}) => {
@@ -113,12 +84,11 @@ const showDialog = (val: any = {}) => {
     nextTick(async () => {
         unref(baseFormRef).instance.resetFields();
         state.isEdit = !!val.id;
+        const permission = await listPermission(val.roleNo);
+        state.treeData =  permission.tree;
+        state.treeCheckData =  permission.checkMenus;
         if (state.isEdit) {
             Object.assign(state.formModel, val);
-            state.treeData = (await listPermission(val.roleNo)) as any;
-            unref(roleTreeRef).setCheckedKeys(val.menuIds);
-        } else {
-            unref(roleTreeRef).setCheckedKeys([]);
         }
     });
 };
@@ -129,11 +99,12 @@ const hideDialog = () => {
 
 const handleSave = async (loading: (flag: boolean) => void) => {
     Object.assign(state.formModel, {
-        menuIds: unref(roleTreeRef).getCheckedKeys()
+      permissions: unref(roleTreeRef).getCheckedKeys()
     });
     await unref(baseFormRef).instance.validate(async (valid: boolean) => {
         if (!valid) return;
-        loading(true);
+      console.log(state.formModel);
+      loading(true);
         try {
             state.isEdit ? await editRole(state.formModel) : await addRole(state.formModel);
             success(state.isEdit ? "修改成功" : "新增成功！");
