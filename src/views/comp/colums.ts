@@ -1,7 +1,7 @@
 import { FormColumnType } from "@/components/base-form";
 import { FormTypeEnum } from "@/enums/componentEnum";
 import { Column } from "@/components/base-table/src/types";
-import { getAllRoleList } from "@/api/system/role";
+import { getDict } from "@/api/system/role";
 import { StatusData } from "@/constant/basic";
 
 export const CountToColumn: FormColumnType[] = [
@@ -231,9 +231,9 @@ export const FormColumn: FormColumnType[] = [
         fieldDesc: "ApiSelect",
         fieldType: FormTypeEnum.SELECT,
         config: {
-            api: getAllRoleList,
-            labelKey: "roleName",
-            valueKey: "role"
+            api: getDict('roleDict'),
+            labelKey: "text",
+            valueKey: "code"
         }
     },
 

@@ -32,7 +32,7 @@ const userRules = {
             trigger: ["blur", "change"]
         }
     ],
-    role: [
+    roleNo: [
         {
             type: "array",
             required: true,
@@ -56,11 +56,12 @@ const showDialog = (val: any = {}) => {
     unref(baseDialogRef).showDialog();
     nextTick(() => {
         unref(baseFormRef).instance.resetFields();
-        isEdit.value = !!val.id;
+        isEdit.value = !!val.username;
         if (unref(isEdit)) {
+          console.log(val);
             Object.assign(formModel, val, {
-                role: val.role?.split(","),
-                deptId: val.deptId?.split(",").map((item: string) => parseFloat(item))
+                roleNo: val.roleNo?.split(","),
+                // deptId: val.deptId?.split(",").map((item: string) => parseFloat(item))
             });
         }
     });
@@ -75,8 +76,8 @@ const handleSave = async (loading: (flag: boolean) => void) => {
         if (!valid) return;
         const formData = deepClone(formModel);
         Object.assign(formData, {
-            deptId: formData.deptId.join(),
-            role: formData.role.join()
+            // deptId: formData.deptId.join(),
+            roleNo: formData.roleNo.join()
         });
         loading(true);
         try {

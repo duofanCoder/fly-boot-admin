@@ -17,7 +17,7 @@ export function useColumn(action?: any,dialog?:any) {
             fieldType: FormTypeEnum.INPUT
         },
         {
-            fieldName: "isEnabled",
+            fieldName: "isLocked",
             fieldDesc: "状态",
             fieldType: FormTypeEnum.SELECT,
             config: {
@@ -37,7 +37,7 @@ export function useColumn(action?: any,dialog?:any) {
             formType: "tag"
         },
         {
-            fieldName: "isEnabled",
+            fieldName: "isLocked",
             fieldDesc: "状态",
             formType: "switch",
             callFunction: action?.changeSwitch

@@ -2,7 +2,7 @@ import request from "@/utils/request";
 
 export enum Api {
     ROLE_LIST = "/api/v1/role/page",
-    ROLE_ALL_LIST = "/role/getAllRoleList",
+    ROLE_ALL_LIST = "/api/v1/dict/list?type=",
     ADD_ROLE = "/api/v1/role/create",
     EDIT_ROLE = "/api/v1/role/update",
     DELETE_ROLE = "/api/v1/role/remove",
@@ -12,7 +12,7 @@ export enum Api {
 
 export const getRoleList = (data?: any) => request.post(Api.ROLE_LIST, data);
 
-export const getAllRoleList = () => request.post(Api.ROLE_ALL_LIST);
+export const getDict = (type:string) => request.post(Api.ROLE_ALL_LIST+type);
 
 export const addRole = (data?: any) => request.post(Api.ADD_ROLE, data);
 

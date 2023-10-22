@@ -1,9 +1,9 @@
-import { FormColumnType } from "@/components/base-form";
-import { FormTypeEnum } from "@/enums/componentEnum";
-import { Column } from "@/components/base-table/src/types";
-import { getAllRoleList } from "@/api/system/role";
-import { getDeptTreeList } from "@/api/system/dept";
-import { StatusData } from "@/constant/basic";
+import {FormColumnType} from "@/components/base-form";
+import {FormTypeEnum} from "@/enums/componentEnum";
+import {Column} from "@/components/base-table/src/types";
+import {getDict} from "@/api/system/role";
+import {getDeptTreeList} from "@/api/system/dept";
+import {StatusData} from "@/constant/basic";
 
 export function useColumn(action?: any) {
     const filterColumn: FormColumnType[] = [
@@ -13,18 +13,19 @@ export function useColumn(action?: any) {
             fieldType: FormTypeEnum.INPUT
         },
         {
-            fieldName: "role",
+            fieldName: "roleNo",
             fieldDesc: "角色",
             fieldType: FormTypeEnum.SELECT,
             config: {
-                api: getAllRoleList,
-                labelKey: "roleName",
-                valueKey: "role"
+                api: () => getDict("roleDict"),
+                labelKey: "text",
+                valueKey: "code",
+                multiple: true
             }
         },
         {
-            fieldName: "status",
-            fieldDesc: "状态",
+            fieldName: "isLocked",
+            fieldDesc: "冻结状态",
             fieldType: FormTypeEnum.SELECT,
             config: {
                 options: StatusData
@@ -38,13 +39,13 @@ export function useColumn(action?: any) {
             fieldDesc: "用户名"
         },
         {
-            fieldName: "role",
+            fieldName: "roleNo",
             fieldDesc: "角色",
             formType: "tag"
         },
         {
-            fieldName: "isEnabled",
-            fieldDesc: "启用",
+            fieldName: "isLocked",
+            fieldDesc: "冻结",
             formType: "switch",
             callFunction: action?.changeSwitch
         },
@@ -88,31 +89,32 @@ export function useColumn(action?: any) {
             fieldType: FormTypeEnum.INPUT
         },
         {
-            fieldName: "role",
+            fieldName: "roleNo",
             fieldDesc: "角色",
             fieldType: FormTypeEnum.SELECT,
             config: {
-                api: getAllRoleList,
-                valueKey: "role",
+                api: () => getDict("roleDict"),
+                labelKey: "text",
+                valueKey: "code",
                 multiple: true
             }
         },
-        {
-            fieldName: "deptId",
-            fieldDesc: "所属部门",
-            fieldType: FormTypeEnum.SELECT,
-            config: {
-                api: getDeptTreeList,
-                tree: true,
-                multiple: true,
-                init: true,
-                nodeKey: "deptId",
-                props: {
-                    label: "deptName",
-                    children: "children"
-                }
-            }
-        },
+        // {
+        //     fieldName: "deptId",
+        //     fieldDesc: "所属部门",
+        //     fieldType: FormTypeEnum.SELECT,
+        //     config: {
+        //         api: getDeptTreeList,
+        //         tree: true,
+        //         multiple: true,
+        //         init: true,
+        //         nodeKey: "deptId",
+        //         props: {
+        //             label: "deptName",
+        //             children: "children"
+        //         }
+        //     }
+        // },
         {
             fieldName: "remark",
             fieldDesc: "备注",
