@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
-import type { Mode } from "@/enums/layoutEnum";
-import type { SizeEnum } from "@/enums/sizeEnum";
-import { store } from "../index";
-import { deepMerge } from "@/utils";
+import {defineStore} from "pinia";
+import type {Mode} from "@/enums/layoutEnum";
+import type {SizeEnum} from "@/enums/sizeEnum";
+import {store} from "../index";
+import {deepMerge} from "@/utils";
 
 export interface MenuSetting {
     mode?: Mode;
@@ -30,7 +30,7 @@ export const useAppStore = defineStore({
             collapse: false,
             sideWidth: 240,
             sideCollapsed: 64,
-            systemTitle: "Vue3 Basic admin"
+            systemTitle: "FLY BOOT ADMIN"
         },
         headerConfig: {
             pageSize: "default"
