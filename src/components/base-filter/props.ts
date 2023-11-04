@@ -26,5 +26,8 @@ export default {
     },
     searchInfo: {
         type: Object
+    },
+    queryParams: {
+        type: Object
     }
 };

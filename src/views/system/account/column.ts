@@ -1,9 +1,8 @@
 import {FormColumnType} from "@/components/base-form";
 import {FormTypeEnum} from "@/enums/componentEnum";
 import {Column} from "@/components/base-table/src/types";
-import {getDict} from "@/api/system/role";
-import {getDeptTreeList} from "@/api/system/dept";
 import {StatusData} from "@/constant/basic";
+import {listDictKeyList} from "@/api/system/dict";
 
 export function useColumn(action?: any) {
     const filterColumn: FormColumnType[] = [
@@ -17,7 +16,7 @@ export function useColumn(action?: any) {
             fieldDesc: "角色",
             fieldType: FormTypeEnum.SELECT,
             config: {
-                api: () => getDict("roleDict"),
+                api: () => listDictKeyList("roleDict"),
                 labelKey: "text",
                 valueKey: "code",
                 multiple: true
@@ -93,7 +92,7 @@ export function useColumn(action?: any) {
             fieldDesc: "角色",
             fieldType: FormTypeEnum.SELECT,
             config: {
-                api: () => getDict("roleDict"),
+                api: () => listDictKeyList("roleDict"),
                 labelKey: "text",
                 valueKey: "code",
                 multiple: true

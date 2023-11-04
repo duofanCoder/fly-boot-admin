@@ -107,7 +107,7 @@ export const extraProps = {
     },
     currentKey: {
         type: String,
-        default: "currentPage"
+        default: "pageIndex"
     },
     pageSizeKey: {
         type: String,

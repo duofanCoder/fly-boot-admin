@@ -8,11 +8,11 @@ export enum Api {
     CHANGE_USER_LOCKED = "/api/v1/user/status/locked"
 }
 
-export const getUserList = (data?: any) => request.post(Api.USER_PAGE, data);
+export const getUserList = (data?: any) => request.get(Api.USER_PAGE, data);
 
 export const addUser = (data?: any) => request.post(Api.ADD_USER, data);
 
-export const deleteUser = (data?: any) => request.post(Api.DELETE_USER, data);
+export const deleteUser = (data?: any) => request.delete(Api.DELETE_USER, data);
 
 export const editUser = (data?: any) => request.post(Api.EDIT_USER, data);
 

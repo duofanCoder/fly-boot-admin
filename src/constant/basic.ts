@@ -6,11 +6,11 @@ export type BasicType = {
 export const StatusData: BasicType[] = [
     {
         label: "启用",
-        value: '1'
+        value: '0'
     },
     {
         label: "停用",
-        value: '0'
+        value: '1'
     }
 ];
 

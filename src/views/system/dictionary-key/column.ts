@@ -1,47 +1,59 @@
-import { FormColumnType } from "@/components/base-form";
-import { FormTypeEnum } from "@/enums/componentEnum";
-import { Column } from "@/components/base-table/src/types";
-import { getDataLabel } from "@/utils";
-import { StatusData } from "@/constant/basic";
+import {FormColumnType} from "@/components/base-form";
+import {FormTypeEnum} from "@/enums/componentEnum";
+import {Column} from "@/components/base-table/src/types";
+import {listDictKeyList} from "@/api/system/dict";
 
 export function useColumn(action?: any) {
     const filterColumn: FormColumnType[] = [
         {
-            fieldName: "dictName",
+            fieldName: "name",
             fieldDesc: "字典名称",
             fieldType: FormTypeEnum.INPUT
         },
         {
-            fieldName: "status",
-            fieldDesc: "字典状态",
+            fieldName: "type",
+            fieldDesc: "字典类型",
             fieldType: FormTypeEnum.SELECT,
             config: {
-                options: StatusData
+                api: () => listDictKeyList("dictTypeDict"),
+                labelKey: "text",
+                valueKey: "code",
+                multiple: true
             }
         }
     ];
 
     const tableColumn: Column[] = [
         {
-            fieldName: "dictName",
+            fieldName: "name",
             fieldDesc: "字典名称",
             showOverflowTooltip: true
         },
         {
-            fieldName: "dictType",
+            fieldName: "type",
             fieldDesc: "字典类型",
             showOverflowTooltip: true
         },
         {
-            fieldName: "status",
-            fieldDesc: "状态",
-            formType: "tag",
-            type: (row: any) => {
-                return row.status === 0 ? "danger" : "";
-            },
-            formatter: (row: any) => {
-                return getDataLabel(StatusData, row.status);
-            }
+            fieldName: "text",
+            fieldDesc: "文本",
+            showOverflowTooltip: true
+        },
+        {
+            fieldName: "code",
+            fieldDesc: "字典值",
+            showOverflowTooltip: true
+        },
+        {
+            fieldName: "isEnabled",
+            fieldDesc: "是否启用",
+            formType: "switch",
+            callFunction: action?.changeSwitch
+        },
+        {
+            fieldName: "description",
+            fieldDesc: "备注",
+            showOverflowTooltip: true
         },
         {
             fieldName: "createTime",
@@ -49,28 +61,61 @@ export function useColumn(action?: any) {
             width: 160
         },
         {
-            fieldName: "remark",
-            fieldDesc: "备注",
-            showOverflowTooltip: true
-        },
-        {
             fieldName: "#",
             fieldDesc: "操作",
             formType: "operation",
-            width: 175,
+            width: 155,
             fixed: "right",
             operation: [
                 {
-                    icon: "search",
-                    label: "查看",
-                    callFunction: action?.search
+                    icon: "edit",
+                    label: "编辑",
+                    callFunction: action?.edit
+                },
+                {
+                    icon: "delete",
+                    label: "删除",
+                    confirm: true,
+                    callFunction: action?.delete
                 }
             ]
         }
     ];
+    const dialogColumn: FormColumnType[] = [
+        {
+            fieldName: "name",
+            fieldDesc: "字典名称",
+            fieldType: FormTypeEnum.INPUT
+        }, {
+            fieldName: "type",
+            fieldDesc: "字典类型",
+            fieldType: FormTypeEnum.INPUT
+        },
+        {
+            fieldName: "text",
+            fieldDesc: "字典文本",
+            fieldType: FormTypeEnum.INPUT
+        },
+        {
+            fieldName: "code",
+            fieldDesc: "字典值",
+            fieldType: FormTypeEnum.INPUT
+        },
+        {
+            fieldName: "description",
+            fieldDesc: "字典描述",
+            fieldType: FormTypeEnum.INPUT
+        },
+        {
+            fieldName: "sort",
+            fieldDesc: "字典排序",
+            fieldType: FormTypeEnum.NUMBER
+        },
+    ];
 
     return {
         filterColumn,
-        tableColumn
+        tableColumn,
+        dialogColumn
     };
 }

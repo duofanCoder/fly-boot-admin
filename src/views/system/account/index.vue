@@ -32,9 +32,8 @@ const filterConfig = reactive({
   columns: filterColumn,
   showOpen: false,
   onSearch: handleSearch,
-  searchInfo: {
-    deptId: ""
-  }
+  searchInfo: {},
+  queryParams: {}
 });
 
 const tableConfig = reactive({
@@ -59,13 +58,13 @@ onMounted(() => {
  */
 async function handleSearch() {
   const {pageCount, pageSize, pageIndex} = tableConfig.pagination;
-  const data = await getUserList({...filterConfig.searchInfo, pageIndex, pageSize});
+  const data = await getUserList({...filterConfig.queryParams, pageIndex, pageSize});
   tableConfig.data = data.list || [];
   tableConfig.pagination.pageCount = data.pageCount;
 }
 
 function handleTreeFilter(val: string) {
-  filterConfig.searchInfo.deptId = val;
+  // filterConfig.searchInfo.deptId = val;
   handleSearch();
 }
 
@@ -81,7 +80,7 @@ async function handleDelete(scope: any) {
   const {id} = scope.row;
   await deleteUser({id});
   success("删除成功");
-  handleSearch();
+  await handleSearch();
 }
 
 async function handleChangeStatus(val: any) {

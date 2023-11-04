@@ -1,16 +1,16 @@
-import { FormColumnType } from "@/components/base-form";
-import { FormTypeEnum } from "@/enums/componentEnum";
-import { Column } from "@/components/base-table/src/types";
-import { StatusData } from "@/constant/basic";
-import { tr } from "element-plus/es/locale";
+import {FormColumnType} from "@/components/base-form";
+import {FormTypeEnum} from "@/enums/componentEnum";
+import {Column} from "@/components/base-table/src/types";
+import {StatusData} from "@/constant/basic";
+import {tr} from "element-plus/es/locale";
 
-export function useColumn(action?: any,dialog?:any) {
+export function useColumn(action?: any, dialog?: any) {
     const filterColumn: FormColumnType[] = [
         {
             fieldName: "roleName",
             fieldDesc: "角色名称",
             fieldType: FormTypeEnum.INPUT
-        },        
+        },
         {
             fieldName: "roleNo",
             fieldDesc: "角色标识",
@@ -37,7 +37,7 @@ export function useColumn(action?: any,dialog?:any) {
             formType: "tag"
         },
         {
-            fieldName: "isLocked",
+            fieldName: "isEnabled",
             fieldDesc: "状态",
             formType: "switch",
             callFunction: action?.changeSwitch
@@ -84,8 +84,8 @@ export function useColumn(action?: any,dialog?:any) {
             fieldName: "roleNo",
             fieldDesc: "角色标识",
             fieldType: FormTypeEnum.INPUT,
-            config:{
-                disabled :dialog?.isEdit
+            config: {
+                disabled: dialog?.isEdit
             }
         },
         {
