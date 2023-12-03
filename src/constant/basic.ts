@@ -13,6 +13,16 @@ export const StatusData: BasicType[] = [
         value: '1'
     }
 ];
+export const BooleanStatus: BasicType[] = [
+    {
+        label: "是",
+        value: '1'
+    },
+    {
+        label: "否",
+        value: '0'
+    }
+];
 
 export const axiosStatus: BasicType[] = [
     {

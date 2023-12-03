@@ -1,8 +1,8 @@
-import { FormColumnType } from "@/components/base-form";
-import { FormTypeEnum } from "@/enums/componentEnum";
-import { Column } from "@/components/base-table/src/types";
-import { getDict } from "@/api/system/role";
-import { StatusData } from "@/constant/basic";
+import {FormColumnType} from "@/components/base-form";
+import {FormTypeEnum} from "@/enums/componentEnum";
+import {Column} from "@/components/base-table/src/types";
+import {StatusData} from "@/constant/basic";
+import {listDictKeyList} from "@/api/system/dict";
 
 export const CountToColumn: FormColumnType[] = [
     {
@@ -142,21 +142,25 @@ export const TableColumn2: Column[] = [
             {
                 icon: "edit",
                 label: "编辑",
-                callFunction: () => {}
+                callFunction: () => {
+                }
             },
             {
                 icon: "delete",
                 label: "删除",
                 confirm: true,
-                callFunction: () => {}
+                callFunction: () => {
+                }
             },
             {
                 label: "新增",
-                callFunction: () => {}
+                callFunction: () => {
+                }
             },
             {
                 label: "修改",
-                callFunction: () => {}
+                callFunction: () => {
+                }
             }
         ]
     }
@@ -231,9 +235,10 @@ export const FormColumn: FormColumnType[] = [
         fieldDesc: "ApiSelect",
         fieldType: FormTypeEnum.SELECT,
         config: {
-            api: getDict('roleDict'),
+            api: () => listDictKeyList("roleDict"),
             labelKey: "text",
-            valueKey: "code"
+            valueKey: "code",
+            multiple: true
         }
     },
 

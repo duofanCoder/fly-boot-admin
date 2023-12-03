@@ -1,69 +1,65 @@
 <template>
   <base-dialog ref="baseDialogRef" width="560px" :title="getDialogTitle" @save="handleSave">
-    <base-form ref="baseFormRef" :columns="dialogColumn" :rules="userRules" :model="formModel"></base-form>
+    <base-form ref="baseFormRef" :columns="getColumn" :rules="userRules" :model="state.formModel">
+    </base-form>
   </base-dialog>
 </template>
 
 <script lang="ts" setup>
 import {useColumn} from "../column";
 import {useMessage} from "@/hooks";
-import {addDictKey, updateDictKey} from "@/api/system/dict";
-import {deepClone} from "@/utils";
+import {saveFlyDictType, updateFlyDictType} from "@/api/system/flyDictType";
 
 const emit = defineEmits(["success"]);
 
 const {success} = useMessage();
 
-const formModel = reactive<any>({});
-
-const {dialogColumn} = useColumn();
-
 const baseDialogRef = ref();
 
 const baseFormRef = ref();
 
-const isEdit = ref(false);
+const state = reactive({
+  isEdit: false,
+  treeData: [],
+  treeCheckData: [],
+  formModel: {}
+});
+const getColumn = computed(() => {
+  return useColumn(undefined, state).dialogColumn;
+});
 
 const userRules = {
-  code: [
-    {
-      required: true,
-      message: "请输入字典值",
-      trigger: ["blur", "change"]
-    }
-  ],
-  text: [
-    {
-      required: true,
-      message: "请输入标签",
-      trigger: ["blur", "change"]
-    }
-  ],
-  type: [
-    {
-      required: true,
-      message: "请输入类型",
-      trigger: ["blur", "change"]
-    }
-  ],
-  name: [
+  title: [
     {
       required: true,
       message: "请输入名称",
       trigger: ["blur", "change"]
     }
+  ], typeId: [
+    {
+      required: true,
+      message: "请输入分类",
+      trigger: ["blur", "change"]
+    }
   ],
+  description: [
+    {
+      required: true,
+      message: "请输入描述",
+      trigger: ["blur", "change"]
+    }
+  ]
 };
 
-const getDialogTitle = computed(() => (unref(isEdit) ? "修改字典" : "新增字典"));
+const getDialogTitle = computed(() => (state.isEdit ? "修改" : "新增"));
 
 const showDialog = (val: any = {}) => {
   unref(baseDialogRef).showDialog();
-  nextTick(() => {
+  nextTick(async () => {
     unref(baseFormRef).instance.resetFields();
-    isEdit.value = !!val.type;
-    if (unref(isEdit)) {
-      Object.assign(formModel, val, {});
+    state.isEdit = !!val.id;
+    if (state.isEdit) {
+      Object.assign(state.formModel, val);
     }
   });
 };
@@ -75,12 +71,10 @@ const hideDialog = () => {
 const handleSave = async (loading: (flag: boolean) => void) => {
   await unref(baseFormRef).instance.validate(async (valid: boolean) => {
     if (!valid) return;
-    const formData = deepClone(formModel);
-
     loading(true);
     try {
-      unref(isEdit) ? await updateDictKey(formData) : await addDictKey(formData);
-      success(unref(isEdit) ? "修改成功" : "新增成功！");
+      state.isEdit ? await updateFlyDictType(state.formModel) : await saveFlyDictType(state.formModel);
+      success(state.isEdit ? "修改成功" : "新增成功！");
       emit("success");
       hideDialog();
     } finally {

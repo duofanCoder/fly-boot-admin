@@ -1,4 +1,4 @@
-import type { AppRouteType } from "@/router/types";
+import type {AppRouteType} from "@/router/types";
 
 const system: AppRouteType[] = [
     {
@@ -69,20 +69,17 @@ const system: AppRouteType[] = [
                 }
             },
             {
-                path: "dictionary-key",
-                name: "DictionaryKey",
-                component: () => import("@/views/system/dictionary-key/index.vue"),
+                path: "dictType",
+                name: "dictType",
+                component: () => import("@/views/system/FlyDictType/index.vue"),
                 meta: {
                     title: "字典管理",
-                    icon: "",
-                    sort: 6,
-                    permission: "ROLE_ADMIN"
                 }
             },
             {
-                path: "dictionary-data/:type",
-                name: "DictionaryData",
-                component: () => import("@/views/system/dictionary-data/index.vue"),
+                path: "dictData/:type",
+                name: "dictData",
+                component: () => import("@/views/system/FlyDictData/index.vue"),
                 meta: {
                     title: "字典数据",
                     hidden: true
