@@ -15,7 +15,10 @@ export function useColumn(action?: any, dialog?: any) {
         {
             fieldName: "isEnabled",
             fieldDesc: "是否启用",
-            fieldType: FormTypeEnum.INPUT
+            fieldType: FormTypeEnum.SELECT,
+            config: {
+                options: BooleanStatus,
+            }
         },
         {
             fieldName: "type",
@@ -93,7 +96,11 @@ export function useColumn(action?: any, dialog?: any) {
         {
             fieldName: "isEnabled",
             fieldDesc: "是否启用",
-            fieldType: FormTypeEnum.SWITCH
+            fieldType: FormTypeEnum.SWITCH,
+            config: {
+                activatedValue: "1",
+                inactivatedValue: "0"
+            }
         },
         {
             fieldName: "remark",

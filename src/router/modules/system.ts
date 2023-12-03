@@ -84,23 +84,6 @@ const system: AppRouteType[] = [
                     title: "字典数据",
                     hidden: true
                 }
-            },
-            {
-                path: "dictType",
-                name: "dictType",
-                component: () => import("@/views/system/FlyDictType/index.vue"),
-                meta: {
-                    title: "字典管理",
-                }
-            },
-            {
-                path: "dictData/:type",
-                name: "dictData",
-                component: () => import("@/views/system/FlyDictData/index.vue"),
-                meta: {
-                    title: "字典数据",
-                    hidden: true
-                }
             }
         ]
     }

@@ -16,7 +16,7 @@ export function useColumn(action?: any, dialog?: any) {
             fieldDesc: "是否启用",
             fieldType: FormTypeEnum.SELECT,
             config: {
-                options: BooleanStatus
+                options: BooleanStatus,
             }
 
         },
