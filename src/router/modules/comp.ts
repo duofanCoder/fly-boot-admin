@@ -1,4 +1,4 @@
-import type { AppRouteType } from "@/router/types";
+import type {AppRouteType} from "@/router/types";
 
 const comp: AppRouteType[] = [
     {
@@ -10,7 +10,7 @@ const comp: AppRouteType[] = [
             title: "组件",
             icon: "svg-comp",
             sort: 6,
-            permission: "admin_comp"
+            permission: "ROLE_ADMIN"
         },
         children: [
             {
@@ -20,7 +20,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Button",
                     sort: 1,
-                    permission: "admin_comp_button",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -31,7 +31,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Icon",
                     sort: 2,
-                    permission: "admin_comp_icon",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -42,7 +42,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "数字滚动",
                     sort: 3,
-                    permission: "admin_comp_count_to",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -53,7 +53,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Dialog",
                     sort: 4,
-                    permission: "admin_comp_dialog",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -64,7 +64,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Loading",
                     sort: 5,
-                    permission: "admin_comp_loading",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -75,7 +75,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "无缝滚动",
                     sort: 6,
-                    permission: "admin_comp_seamscroll",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -86,7 +86,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "虚拟滚动",
                     sort: 6,
-                    permission: "admin_comp_virtualscroll",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -97,7 +97,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Tree选择",
                     sort: 7,
-                    permission: "admin_comp_tree_select",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -108,7 +108,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Select",
                     sort: 8,
-                    permission: "admin_comp_select",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -119,7 +119,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Table",
                     sort: 9,
-                    permission: "admin_comp_table",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -130,7 +130,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Form",
                     sort: 10,
-                    permission: "admin_comp_form",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -140,7 +140,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Echarts",
                     sort: 11,
-                    permission: "admin_comp_echarts",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 },
                 redirect: "/comp/echarts/bar/index",
@@ -152,7 +152,7 @@ const comp: AppRouteType[] = [
                         meta: {
                             title: "柱状图",
                             sort: 1,
-                            permission: "admin_comp_echarts_bar",
+                            permission: "ROLE_ADMIN",
                             icon: ""
                         }
                     },
@@ -163,7 +163,7 @@ const comp: AppRouteType[] = [
                         meta: {
                             title: "折线图",
                             sort: 2,
-                            permission: "admin_comp_echarts_line",
+                            permission: "ROLE_ADMIN",
                             icon: ""
                         }
                     },
@@ -174,7 +174,7 @@ const comp: AppRouteType[] = [
                         meta: {
                             title: "饼图",
                             sort: 3,
-                            permission: "admin_comp_echarts_pie",
+                            permission: "ROLE_ADMIN",
                             icon: ""
                         }
                     },
@@ -185,7 +185,7 @@ const comp: AppRouteType[] = [
                         meta: {
                             title: "关系图",
                             sort: 4,
-                            permission: "admin_comp_echarts_graph",
+                            permission: "ROLE_ADMIN",
                             icon: ""
                         }
                     },
@@ -196,7 +196,7 @@ const comp: AppRouteType[] = [
                         meta: {
                             title: "地图",
                             sort: 5,
-                            permission: "admin_comp_echarts_map",
+                            permission: "ROLE_ADMIN",
                             icon: ""
                         }
                     },
@@ -207,7 +207,7 @@ const comp: AppRouteType[] = [
                         meta: {
                             title: "其他图表",
                             sort: 6,
-                            permission: "admin_comp_echarts_other",
+                            permission: "ROLE_ADMIN",
                             icon: ""
                         }
                     }
@@ -220,7 +220,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "富文本编辑器",
                     sort: 12,
-                    permission: "admin_comp_editor",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -231,7 +231,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "Markdown",
                     sort: 13,
-                    permission: "admin_comp_markdown",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -242,7 +242,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "JSON编辑器",
                     sort: 14,
-                    permission: "admin_comp_json",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             },
@@ -253,7 +253,7 @@ const comp: AppRouteType[] = [
                 meta: {
                     title: "拍照视频",
                     sort: 15,
-                    permission: "admin_comp_photograph",
+                    permission: "ROLE_ADMIN",
                     icon: ""
                 }
             }

@@ -1,61 +1,64 @@
 import {FormColumnType} from "@/components/base-form";
 import {FormTypeEnum} from "@/enums/componentEnum";
 import {Column} from "@/components/base-table/src/types";
-import {StatusData} from "@/constant/basic";
+import {listDictKeyList} from "@/api/system/dict";
+import {getDataLabel} from "@/utils";
+import {BooleanStatus} from "@/constant/basic";
 
 export function useColumn(action?: any, dialog?: any) {
     const filterColumn: FormColumnType[] = [
         {
-            fieldName: "roleName",
-            fieldDesc: "角色名称",
+            fieldName: "name",
+            fieldDesc: "名称",
             fieldType: FormTypeEnum.INPUT
         },
         {
-            fieldName: "roleNo",
-            fieldDesc: "角色标识",
+            fieldName: "isEnabled",
+            fieldDesc: "是否启用",
             fieldType: FormTypeEnum.INPUT
         },
         {
-            fieldName: "isLocked",
-            fieldDesc: "状态",
-            fieldType: FormTypeEnum.SELECT,
-            config: {
-                options: StatusData
-            }
-        }
+            fieldName: "type",
+            fieldDesc: "类型",
+            fieldType: FormTypeEnum.INPUT
+        },
     ];
 
     const tableColumn: Column[] = [
         {
-            fieldName: "roleName",
-            fieldDesc: "角色名称"
+            fieldName: "name",
+            fieldDesc: "名称",
+            formType: "slot"
         },
         {
-            fieldName: "roleNo",
-            fieldDesc: "角色标识",
-            formType: "tag"
+            fieldName: "type",
+            fieldDesc: "类型",
         },
         {
             fieldName: "isEnabled",
-            fieldDesc: "状态",
-            formType: "switch",
-            callFunction: action?.changeSwitch
-        },
-        {
-            fieldName: "createTime",
-            fieldDesc: "创建时间",
-            width: 160
+            fieldDesc: "是否启用",
+            formatter: (row: any) => {
+                return getDataLabel(BooleanStatus, row.isEnabled);
+            }
         },
         {
             fieldName: "remark",
             fieldDesc: "备注",
-            showOverflowTooltip: true
+        },
+        {
+            fieldName: "sort",
+            fieldDesc: "排序",
+        },
+
+        {
+            fieldName: "updateTime",
+            fieldDesc: "修改时间",
         },
         {
             fieldName: "#",
             fieldDesc: "操作",
             formType: "operation",
-            width: 175,
+            width: 375,
             fixed: "right",
             operation: [
                 {
@@ -66,40 +69,42 @@ export function useColumn(action?: any, dialog?: any) {
                 {
                     icon: "delete",
                     label: "删除",
-                    confirm: true,
                     callFunction: action?.delete
                 }
             ]
         }
     ];
-
     const dialogColumn: FormColumnType[] = [
         {
-            fieldName: "roleName",
-            fieldDesc: "角色名称",
+            fieldName: "name",
+            required: true,
+            fieldDesc: "名称",
             fieldType: FormTypeEnum.INPUT
         },
         {
-            fieldName: "roleNo",
-            fieldDesc: "角色标识",
+            fieldName: "type",
+            required: true,
+            fieldDesc: "类型",
             fieldType: FormTypeEnum.INPUT,
             config: {
                 disabled: dialog?.isEdit
             }
         },
         {
-            fieldName: "menuIds",
-            fieldDesc: "菜单",
-            fieldType: FormTypeEnum.SLOT
+            fieldName: "isEnabled",
+            fieldDesc: "是否启用",
+            fieldType: FormTypeEnum.SWITCH
         },
         {
             fieldName: "remark",
             fieldDesc: "备注",
-            fieldType: FormTypeEnum.INPUT,
-            config: {
-                type: "textarea"
-            }
-        }
+            fieldType: FormTypeEnum.INPUT
+        },
+        {
+            fieldName: "sort",
+            fieldDesc: "排序",
+            fieldType: FormTypeEnum.INPUT
+        },
     ];
 
     return {
