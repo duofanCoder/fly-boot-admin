@@ -21,9 +21,9 @@ const tableConfig = reactive({
     columns: tableColumn,
     data: [],
     pagination: {
-        currentPage: 1,
+        pageIndex: 1,
         pageSize: 10,
-        total: 0
+        pageCount: 0
     },
     indexShow: false,
     onRefresh: handleSearch
@@ -37,11 +37,11 @@ onMounted(() => {
  * 查询
  */
 async function handleSearch() {
-    const { pageCount, pageSize,pageIndex } = tableConfig.pagination;
-    const data = (await getApiList({ ...filterConfig.searchInfo, currentPage, pageSize })) as any;
+    const {  pageSize,pageIndex } = tableConfig.pagination;
+    const data = (await getApiList({ ...filterConfig.searchInfo, pageIndex, pageSize })) as any;
     tableConfig.data = data.list || [];
 
-    tableConfig.pagination.total = res.data.total || 0;
+    tableConfig.pagination.pageCount = data.total || 0;
 }
 </script>
 

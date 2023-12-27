@@ -1,7 +1,6 @@
 import {FormColumnType} from "@/components/base-form";
 import {FormTypeEnum} from "@/enums/componentEnum";
 import {Column} from "@/components/base-table/src/types";
-import {listDictKeyList} from "@/api/system/dict";
 import {getDataLabel} from "@/utils";
 import {BooleanStatus} from "@/constant/basic";
 
@@ -15,10 +14,7 @@ export function useColumn(action?: any, dialog?: any) {
         {
             fieldName: "isEnabled",
             fieldDesc: "是否启用",
-            fieldType: FormTypeEnum.SELECT,
-            config: {
-                options: BooleanStatus,
-            }
+            fieldType: FormTypeEnum.INPUT
         },
         {
             fieldName: "type",
@@ -98,8 +94,8 @@ export function useColumn(action?: any, dialog?: any) {
             fieldDesc: "是否启用",
             fieldType: FormTypeEnum.SWITCH,
             config: {
-                activatedValue: "1",
-                inactivatedValue: "0"
+                activeValue: '1',
+                inactiveValue: '0'
             }
         },
         {

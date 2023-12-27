@@ -1,6 +1,5 @@
 <template>
   <div class="system-account-container flex">
-    <DeptTree @filter="handleTreeFilter"/>
     <div class="account-user">
       <base-page-table table-title="用户列表" :filter-config="filterConfig" :table-config="tableConfig">
         <template #buttons>
@@ -15,7 +14,6 @@
 <script lang="ts" setup name="Account">
 import {getUserList, deleteUser, changeUserStatus} from "@/api/system/user";
 import {useColumn} from "./column";
-import DeptTree from "./components/DeptTree.vue";
 import UserDialog from "./components/UserDialog.vue";
 import {useMessage} from "@/hooks";
 import {messageBox} from "@/utils";
@@ -102,7 +100,7 @@ async function handleChangeStatus(val: any) {
 
   .account-user {
     margin-left: 16px;
-    width: calc(100% - 316px);
+    width: 100%;
   }
 }
 </style>

@@ -5,6 +5,12 @@ import {StatusData} from "@/constant/basic";
 import {listDictKeyList} from "@/api/system/dict";
 
 export function useColumn(action?: any) {
+
+    const roleDictRef = ref([]);
+
+    listDictKeyList("roleDict").then(data => {
+        roleDictRef.value = data;
+    });
     const filterColumn: FormColumnType[] = [
         {
             fieldName: "username",
@@ -16,9 +22,7 @@ export function useColumn(action?: any) {
             fieldDesc: "角色",
             fieldType: FormTypeEnum.SELECT,
             config: {
-                api: () => listDictKeyList("roleDict"),
-                labelKey: "text",
-                valueKey: "code",
+                api: () => unref(roleDictRef),
                 multiple: true
             }
         },

@@ -2,6 +2,7 @@ import {FormColumnType} from "@/components/base-form";
 import {FormTypeEnum} from "@/enums/componentEnum";
 import {Column} from "@/components/base-table/src/types";
 import {StatusData} from "@/constant/basic";
+import {tr} from "element-plus/es/locale";
 
 export function useColumn(action?: any, dialog?: any) {
     const filterColumn: FormColumnType[] = [
