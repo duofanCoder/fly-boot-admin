@@ -1,19 +1,19 @@
-import { PluginOption } from "vite";
+import {PluginOption} from "vite";
 import path from "path";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
+import {createSvgIconsPlugin} from "vite-plugin-svg-icons";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import ElementPlus from "unplugin-element-plus/vite";
-import { viteMockServe } from "vite-plugin-mock";
-import { createHtmlPlugin } from "vite-plugin-html";
-import { visualizer } from "rollup-plugin-visualizer";
+import {viteMockServe} from "vite-plugin-mock";
+import {createHtmlPlugin} from "vite-plugin-html";
+import {visualizer} from "rollup-plugin-visualizer";
 import viteImagemin from "vite-plugin-imagemin";
 import compressPlugin from "vite-plugin-compression";
-import { viteBuildInfo } from "./info";
-import { setupName } from "./name";
+import {viteBuildInfo} from "./info";
+import {setupName} from "./name";
 // @ts-ignore
 import pkg from "../package.json";
 
@@ -76,7 +76,7 @@ const configCompress = (compress: "gzip" | "brotli" | "none", deleteOriginFile =
 };
 
 export function createVitePlugins(env: any, isBuild: boolean) {
-    const { VITE_APP_NAME } = env;
+    const {VITE_APP_NAME} = env;
 
     const isReport = process.env.REPORT === "true";
 
@@ -142,9 +142,7 @@ export function createVitePlugins(env: any, isBuild: boolean) {
             prodEnabled: isBuild,
             // 生产使用mock
             injectCode: `
-              import { setupProdMockServer } from './mockProdServer';
 
-              setupProdMockServer();
             `
         })
     ];
