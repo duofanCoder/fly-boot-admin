@@ -2,12 +2,13 @@ import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } fro
 import axios from "axios";
 import { useEnv, useMessage } from "@/hooks";
 import { ResultEnum, ContentTypeEnum } from "@/enums/httpEnum";
-import { useUserStoreWithOut } from "@/stores/modules/user";
+import { useUserStore, useUserStoreWithOut } from "@/stores/modules/user";
 import { setErrorMessage, addAjaxErrorLog, addAjaxLog } from "./log";
 import { AxiosLoading } from "./loading";
 import { AxiosCancel } from "./cancel";
 import { AxiosRetry } from "./retry";
-
+import { useRouter } from "vue-router";
+import router from "@/router";
 interface axiosConfig {
     successMessage?: boolean;
     errorMessage?: boolean;
@@ -16,11 +17,13 @@ interface axiosConfig {
     isRetry?: boolean;
     loading?: boolean;
 }
+
 interface flyResult<T> {
     data: T;
     msg: string;
     code: string;
 }
+
 const defaultConfig: axiosConfig = {
     successMessage: false,
     errorMessage: true,
@@ -68,7 +71,14 @@ service.interceptors.response.use(
             // addAjaxLog(response);
             return data.data;
         } else {
-            // addAjaxErrorLog(response, data.message);
+            if (data.code === ResultEnum.TOKEN_EXPIRED) {
+                const store = useUserStore();
+                store.logout(router);
+                setTimeout(() => {
+                    useMessage().error(data.msg);
+                }, 500);
+                return Promise.reject(data);
+            }
             useMessage().error(data.msg);
             return Promise.reject(data);
         }
